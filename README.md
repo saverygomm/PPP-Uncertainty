@@ -2,15 +2,13 @@
 
 **About this repository**
 
-Citation:
 This repository can be cited as:
 
-_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Cost-effective recovery planning for threatened species is robust to data uncertainty. Figshare. https://doi.org/10.6084/m9.figshare.28578413
-_
+_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Cost-effective recovery planning for threatened species is robust to data uncertainty. Figshare. https://doi.org/10.6084/m9.figshare.28578413_
+
 This repository contains all data and code necessary to generate manuscript results associated with the following peer-reviewed publication:
 
-_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Cost-effective recovery planning for threatened species is robust to data uncertainty. Journal TBD. DOI TBD.
-_
+_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Cost-effective recovery planning for threatened species is robust to data uncertainty. Journal TBD. DOI TBD._
 
 **Abstract**
 
