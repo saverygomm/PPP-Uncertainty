@@ -8,12 +8,7 @@ _Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L
 
 This repository contains all data and code necessary to generate manuscript results associated with the following peer-reviewed publication:
 
-_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Cost-effective recovery planning for threatened species is robust to data uncertainty. Journal TBD. DOI TBD._
-
-**Abstract**
-
-Numerous tools exist to guide cost-effective conservation decisions. A key challenge is ensuring that these tools generate reliable guidance, even when data are highly uncertain. Decision-makers often question whether such tools remain useful when uncertainty is high, but the critical question is whether decision guidance is robust to it. The Project Prioritization Protocol (PPP) is an approach for guiding resource allocation decisions across conservation projects. Based on estimates of the cost, benefit and feasibility of each project, the approach calculates cost-effectiveness, ranks projects and identifies a subset that will deliver the biggest return on investment. Government agencies in Oceania have applied the PPP to endangered species recovery, and a prototype exists in the United States. In this study, we examine how uncertainty in estimates of recovery plan cost, conservation benefit, and probability of success affects the composition of funded portfolios and the expected conservation benefit, using a sensitivity analysis to explore when decision guidance remains robust. Our findings suggest that both remain robust to simulated uncertainty. While these results are specific to this study, the approach is broadly useful. Individuals aiming to use cost-effectiveness analyses for prioritization decisions can address data quality concerns by performing comparable sensitivity analyses.
-
+_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol. Journal TBD. DOI TBD._
 
 **Contents**
 
