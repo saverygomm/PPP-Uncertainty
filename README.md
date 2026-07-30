@@ -1,10 +1,8 @@
-# Cost-Effective Recovery Planning for Threatened Species is Robust to Data Uncertainty
-
 **About this repository**
 
 This repository can be cited as:
 
-_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Cost-effective recovery planning for threatened species is robust to data uncertainty. Figshare. https://doi.org/10.6084/m9.figshare.28578413_
+_Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Crouse, D., Newman, J., Rogers, A., Runge, M., & Gerber, L. Year TBD. Data and code to support "How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol". Figshare. https://doi.org/10.6084/m9.figshare.28578413_
 
 This repository contains all data and code necessary to generate manuscript results associated with the following peer-reviewed publication:
 
@@ -54,18 +52,6 @@ install.packages(c("tidyverse",
                    "openxlsx"]]
 
 
-**Terms of Use: CC-BY**
-
-You are free to:
-
-**Share** — copy and redistribute the material in any medium or format for any purpose, even commercially.
-**Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
-The licensor cannot revoke these freedoms as long as you follow the license terms.
-
-Under the following terms:
-
-**Attribution **— You must give appropriate credit, provide a link to the license, and indicate if changes were made . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 
 
 
