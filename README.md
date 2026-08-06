@@ -16,7 +16,7 @@ This study examines how uncertainty in estimates of recovery plan cost, conserva
 
 The code required to reproduce the ppp analysis is located in /ppp_project/final_script.R and relies on input files stored in /ppp_project/data/. The script is well-commented and structured into the following sections:
 
-## 1) Set the Working Directory
+### 1) Set the Working Directory
 
 Before running the analysis, set the working directory to the **ppp_project** folder. Use the following command, replacing `"path/to/ppp_project"` with the actual location on your system:
 
@@ -24,7 +24,7 @@ Before running the analysis, set the working directory to the **ppp_project** fo
 setwd("path/to/ppp_project")
 ```
 
-## 2) Installation
+### 2) Installation
 
 Ensure that all necessary R packages are installed by running the following command:
 
@@ -32,9 +32,9 @@ Ensure that all necessary R packages are installed by running the following comm
 install.packages(c("magrittr", "DT", "ggplot2", "plotly", "tidyverse","scales","reshape2", "simpleboot", "cowplot", "simpleboot", "boot"))
 ```
 
-## 3) Import and Process Species Plan Data for Analysis
+### 3) Import and Process Species Plan Data for Analysis
 
-### Datasets Used  
+#### Datasets Used  
 The following datasets, located in the **data/** directory, serve as inputs for the analysis:  
 
 - **AllPPPOutput.csv**: Final output from the PPP analysis, providing cost estimates at the **Recovery Plan** level (identified by `unique_plan_num`).  
@@ -47,7 +47,7 @@ The following datasets, located in the **data/** directory, serve as inputs for 
 
 - **sim_df_baseline.csv**: A dataset containing budget parameters.  
 
-### Processed Dataset  
+#### Processed Dataset  
 During preprocessing, non-essential variables are removed from each dataset. The following columns are retained in the **dataSpp** dataset, located in **ppp_project/output/**:  
 
 - **sp_vip_code**: Unique species identification code.  
@@ -82,7 +82,7 @@ During preprocessing, non-essential variables are removed from each dataset. The
 
 For a detailed breakdown of how these datasets are processed and combined, refer to **final_script.RMD**.  
 
-## 4) Results
+### 4) Results
 
 The following dataframes contain the results of the analysis and, after running the code, can be located in the **ppp_project/output/** directory.
 
@@ -111,7 +111,7 @@ For each of the above combinations, four output dataframes are generated and sav
 
 These output files allow for an in-depth assessment of how uncertainty in costs, benefits, and success probabilities influences conservation planning decisions under different budget constraints.
 
-## 5) Tables and Figures
+### 5) Tables and Figures
 
 This section of code generates the following figures, which can be found in the **/ppp_project/output/** directory:
 
@@ -120,7 +120,7 @@ This section of code generates the following figures, which can be found in the 
 - **ppp_figure_3.pdf**: Illustration of the fraction of recovery plans in each decision category as a function of inclusion thresholds.  
 - **ppp_figure_4.pdf**: Depiction of variation in conservation benefit under simulated uncertainty, applied separately to benefits, probability of success, and costs.  
 
-## 6) Example of Variance in Benefits, Success, and Cost  
+### 6) Example of Variance in Benefits, Success, and Cost  
 
 The following tables illustrate how variance is introduced to the **Cost**, **Benefit**, and **Success** parameters under low, medium, and high uncertainty levels:  
 
@@ -154,7 +154,7 @@ This project requires the following R packages:
 │── ppp_script.R         # Main script
 ```
 
-**Terms of Use: CC-BY-40**
+## Terms of Use: CC-BY-40
 
 You are free to:
 
