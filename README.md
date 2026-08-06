@@ -10,11 +10,11 @@ This repository contains all data and code necessary to generate manuscript resu
 Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Rogers, A., Gerber, L. & Runge, M. TBD. _How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol._ TBD. https://doi.org/TBD
  
 ## Description
-This study examines how uncertainty in estimates of recovery plan cost, conservation benefit, and probability of success influences the composition of funded portfolios and the expected conservation benefit. Through a sensitivity analysis, we identify scenarios where decision guidance remains robust despite data uncertainty.
+This study examines how simulated uncertainty in estimates of recovery plan cost, conservation benefit, and probability of success influences the composition of funded portfolios and the expected conservation benefit. Through a sensitivity analysis, we identify scenarios where decision guidance remains robust despite data uncertainty.
 
 ## Code
 
-The code required to reproduce the ppp analysis is `final_script.Rmd` and relies on input files stored in `data/`. The script is well-commented and structured into the following sections:
+The code required to reproduce the ppp analysis is `final_script.Rmd` and relies on input files stored in `data/`. The code runs on R version 3.3.2, with packages downloaded as of 2016-11-12. Compatible packages are provided in a packages.zip. The script is well-commented and structured into the following sections:
 
 
 ### 1) Installation
