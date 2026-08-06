@@ -2,128 +2,126 @@
 
 This repository can be cited as:
 
-
-Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Rogers, A., Gerber, L. & Runge, M. 2026. Data and code supporting _"How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol."_ Figshare. https://doi.org/10.6084/m9.figshare.28578413
+> Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Rogers, A., Gerber, L. & Runge, M. 2026. Data and code supporting _"How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol."_ Figshare. https://doi.org/10.6084/m9.figshare.28578413
 
 This repository contains all data and code necessary to generate manuscript results associated with the following peer-reviewed publication:
 
-Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Rogers, A., Gerber, L. & Runge, M. TBD. _How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol._ TBD. https://doi.org/TBD
+> Avery-Gomm, S., Iacona, G., Drew, C. A., Maloney, R., Possingham, H., Rumpff, L., Rogers, A., Gerber, L. & Runge, M. (TBD). _How robust are conservation prioritization decisions to data uncertainty? A case study using the Project Prioritization Protocol._ TBD. https://doi.org/TBD
  
 ## Description
+
 This study examines how simulated uncertainty in estimates of recovery plan cost, conservation benefit, and probability of success influences the composition of funded portfolios and the expected conservation benefit. Through a sensitivity analysis, we identify scenarios where decision guidance remains robust despite data uncertainty.
 
 ## Code
 
-The code required to reproduce the ppp analysis is `final_script.Rmd` and relies on input files stored in `data/`. The code runs on R version 3.3.2, with packages downloaded as of 2016-11-12. Compatible packages are provided in a packages.zip. The script is well-commented and structured into the following sections:
+The code required to reproduce the PPP analysis is `final_script.Rmd` and relies on input files stored in **data/**. The script is well-commented and structured as described below.
 
+### Prerequisites
 
-### 1) Installation
-
-Ensure that all necessary R packages are installed by running the following command:
+- **R version**: 3.3.2 (or compatible)
+- **Required packages**: Install before running:
 
 ```r
-install.packages(c("magrittr", "DT", "ggplot2", "plotly", "tidyverse","scales","reshape2", "simpleboot", "cowplot", "simpleboot", "boot"))
+install.packages(c("magrittr", "DT", "ggplot2", "plotly", "tidyverse", "scales", 
+                   "reshape2", "simpleboot", "cowplot", "boot"))
 ```
 
-### 2) Import and Process Species Plan Data for Analysis
+### 1) Import and Process Species Plan Data for Analysis
 
-#### Datasets Used  
-The following datasets, located in the **data/** directory, serve as inputs for the analysis:  
+#### Input Datasets  
 
-- **AllPPPOutput.csv**: Final output from the PPP analysis, providing cost estimates at the **Recovery Plan** level (identified by `unique_plan_num`).  
+The following datasets, located in **data/**, serve as inputs for the analysis:  
 
-- **draft_b.csv**: An intermediate dataset generated prior to **Data2.csv** in the `GenerateBenefits.R` function of the PPP analysis. `data_b` indicates which `sp_vip_codes` were included in the analysis and links benefit data from the species-level **RPN** file.  
+- **AllPPPOutput.csv**: Final output from the [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434) PPP analysis, providing cost estimates at the recovery plan level (identified by `unique_plan_num`).  
 
-- **RPNs-for-plan_id-and-sp_vip_code-combos-NAs-imputed.csv**: The *first* intermediate dataset produced by `RPN_Benefit_Success_Taxonomy3.R`, containing necessary data on **B** and **B_with_without_Mgmt** at the `sp_vip_code` level.  
+- **draft_b.csv**: An intermediate dataset generated prior to **Data2.csv** in the `GenerateBenefits.R` function. Indicates which `sp_vip_codes` were included in the analysis and links benefit data from the species-level RPN file.  
 
-- **sim_df.chosen.csv**: A dataset with selected variance parameters for cost, benefit, and success variables.  
+- **RPNs-for-plan_id-and-sp_vip_code-combos-NAs-imputed.csv**: The first intermediate dataset produced by `RPN_Benefit_Success_Taxonomy3.R`, containing benefit and management-weighted benefit data at the `sp_vip_code` level.  
 
-- **sim_df_baseline.csv**: A dataset containing budget parameters.  
+- **sim_df.chosen.csv**: Selected variance parameters for cost, benefit, and success variables.  
 
-#### Processed Dataset  
-During preprocessing, non-essential variables are removed from each dataset. The following columns are retained in the **dataSpp** dataset, located in **output/**:  
+- **sim_df_baseline.csv**: Budget parameters for sensitivity analyses.  
 
-- **sp_vip_code**: Unique species identification code.  
-- **unique_plan_num**: Unique identifier for each conservation plan.  
-- **RPN_Benefit**: Conservation benefit from intervention/management (continuous variable: 0–1).  
-- **RPN_TaxoWeighting**: Taxonomic uniqueness score (continuous variable: 0.33–1, with higher values indicating greater rarity).  
-- **taxanomic_group**: Taxonomic classification of the species.  
-- **rpn**: USFWS prioritization classification (lower values indicate higher priority); the `"C"` modifier denotes candidate species for ESA listing.  
-- **threat_status**: ESA threat status classification.  
-- **RPN_noC**: RPN classification excluding the `"C"` modifier.  
-- **Conflict**: Binary variable (0 or 1), indicating whether conservation efforts may cause social or economic disruptions.  
-- **USFWS_RPN_Available**: Binary variable (0 or 1), indicating whether RPN data is available.  
-- **RPN_TaxoWeighting_char**: Taxonomic weighting category (`"Subspecies"`, `"Species"`, `"Monotypic_genus"`, `"NA"`).  
-- **RPN_Degree_of_Threat**: Threat level classification (`"Moderate"`, `"High"`, `"Low"`, `"NA"`).  
-- **RPN_Recoverability_Potential**: Recoverability classification (`"High"`, `"Low"`, `"NA"`).  
-- **Benefit_with_Mgmt**: Species benefit from conservation intervention (continuous variable: 0–1, with 1 indicating the greatest benefit).  
-- **Benefit_without_Mgmt**: Species conservation status improvement without intervention (continuous variable: 0–1, with 1 indicating the greatest benefit).  
-- **sp_vip_code_in_plan_id**: Number of species included in the same conservation plan.  
-- **unique_id**: Unique identifier for the recovery plan.  
-- **plan_title**: Name of the recovery plan.  
-- **SpeciesInPlan**: Number of species covered by the plan (range: 1–66).  
-- **Responsible_region**: USFWS regional classification (1–8) [see details here](https://www.fws.gov/about/regions).  
-- **taxa_code_text**: Taxonomic classification (`"Mammals"`, `"Flowering Plants"`, `"Birds"`, `"Insects"`, `"Snails"`, `"Crustaceans"`, `"Amphibians"`, `"Fishes"`, `"Lichens"`, `"Clams"`, `"Reptiles"`, `"Arachnids"`, `"Ferns and Allies"`, `"Conifers and Cycads"`).  
-- **plan_CE**: Cost-efficiency metric of the conservation plan.  
-- **plan_B**: Conservation impact of the plan (continuous variable: 0.001–40.59).  
-- **plan_W**: Taxonomic uniqueness score (continuous variable: 0.33–1, with higher values indicating greater rarity).  
-- **S**: Probability of plan success (continuous variable: 0.5–0.88).  
-- **Co**: Total 50-year cost of conservation management (continuous variable: $1,973–$20,395,753,569).  
-- **B_without_Mgmt**: Species conservation status improvement without intervention (continuous variable: 0–1).  
-- **B_with_Mgmt**: Species benefit with conservation intervention (continuous variable: 0–1).  
-- **B**: Net benefit of management (continuous variable: 0.12–0.88, calculated as **Benefit_with_Mgmt - Benefit_without_Mgmt**). 
+#### Processed Dataset Output
 
-For a detailed breakdown of how these datasets are processed and combined, refer to `final_script.Rmd`.  
+After preprocessing (via `final_script.Rmd`), the **dataSpp** dataset is saved to **output/** with the following columns, organized by scope:
 
-### 3) Results
+##### Species-Level Variables
 
-The following dataframes contain the results of the analysis and, after running the code, can be located in the `output/` directory.
+- **sp_vip_code**: Unique species identification code.
+- **RPN_Benefit**: Conservation benefit from intervention/management (0–1).
+- **RPN_TaxoWeighting**: Taxonomic uniqueness score (0.33–1, higher = greater rarity).
+- **RPN_Degree_of_Threat**: Threat level classification (`"Moderate"`, `"High"`, `"Low"`, `"NA"`).
+- **RPN_Recoverability_Potential**: Recoverability classification (`"High"`, `"Low"`, `"NA"`).
+- **Benefit_with_Mgmt**: Species benefit from conservation intervention (0–1).
+- **Benefit_without_Mgmt**: Species conservation status without intervention (0–1).
+- **RPN_TaxoWeighting_char**: Taxonomic weighting category (`"Subspecies"`, `"Species"`, `"Monotypic_genus"`, `"NA"`).
 
-Data uncertainty was simulated with respect to **costs (C)**, **benefits (B)**, and **probability of success (S)** in different combinations to assess the impact of uncertainty in each scenario. These included:
+##### Plan-Level Variables
 
-- **BSCo_**: Variance applied to *benefit, success, and cost*.
-- **BS_**: Variance applied to *benefit and success*.
-- **BCo_**: Variance applied to *benefit and cost*.
-- **SCo_**: Variance applied to *success and cost*.
-- **S_**: Variance applied to *success* only.
-- **Co_**: Variance applied to *cost* only.
-- **B_**: Variance applied to *benefit* only.
+- **unique_plan_num**: Unique identifier for each conservation plan.
+- **unique_id**: Unique identifier for the recovery plan.
+- **plan_title**: Name of the recovery plan.
+- **SpeciesInPlan**: Number of species covered by the plan (1–66).
+- **sp_vip_code_in_plan_id**: Number of species included in the same conservation plan.
+- **plan_CE**: Cost-efficiency metric of the conservation plan.
+- **plan_B**: Conservation impact of the plan (0.001–40.59).
+- **plan_W**: Taxonomic uniqueness score (0.33–1, higher = greater rarity).
+- **S**: Probability of plan success (0.5–0.88).
+- **Co**: Total 50-year cost of conservation management ($1,973–$20,395,753,569).
+- **B**: Net benefit of management (0.12–0.88), calculated as **Benefit_with_Mgmt - Benefit_without_Mgmt**.
+- **B_without_Mgmt**: Species conservation status without intervention (0–1).
+- **B_with_Mgmt**: Species benefit with conservation intervention (0–1).
 
-For each of the above combinations, four output dataframes are generated and saved in the output folder (example below uses `B` as the placeholder, but all combinations are included in the analysis):
+##### Metadata Variables
 
-- **B_output.csv**: Contains data on the mean number of species funded per plan and variance about that mean with added uncertainty. It also includes the mean conservation benefits per plan and variance around that estimate.
+- **taxonomic_group**: Taxonomic classification of the species.
+- **taxa_code_text**: Taxonomic group (`"Mammals"`, `"Birds"`, `"Flowering Plants"`, `"Insects"`, `"Fishes"`, `"Amphibians"`, `"Reptiles"`, `"Snails"`, `"Crustaceans"`, `"Clams"`, `"Arachnids"`, `"Lichens"`, `"Ferns and Allies"`, `"Conifers and Cycads"`).
+- **rpn**: USFWS prioritization classification (lower = higher priority). The `"C"` modifier denotes candidate species for ESA listing.
+- **RPN_noC**: RPN classification excluding the `"C"` modifier.
+- **threat_status**: ESA threat status classification.
+- **Conflict**: Binary indicator (0 or 1) of whether conservation efforts may cause social or economic disruptions.
+- **USFWS_RPN_Available**: Binary indicator (0 or 1) of whether RPN data is available.
+- **Responsible_region**: [USFWS regional classification](https://www.fws.gov/about/regions) (1–8).
 
-- **B_probfund.csv**: For each combination of added variance (low, medium, high) introduced to the target variable(s), this dataframe captures the average number of times the species plan was selected for inclusion under the specified budget, indicating its probability of being included.
+For a detailed breakdown of how these datasets are processed and combined, see `final_script.Rmd`.
 
-- **B_probfund_results.csv**: Based on the probability of inclusion scores from `B_probfund.csv`, plans are classified into three categories:
-  - Always included: 100% probability of inclusion.
-  - Sometimes included: Between 0% and 100% probability of inclusion.
-  - Never included: 0% probability of inclusion.
-  This dataframe summarizes the number of plans categorized under each variance scenario. 
-- **one.of.the.datasim.B.csv**: For each variance scenario, 100 simulations are run to introduce uncertainty into the targeted parameter. The efficiency of each plan is ranked accordingly, and the most efficient plans are included in the final portfolio until the budget threshold is met. A datasim placeholder is created for each iteration, and a sample datasim is exported as a CSV file for reference.
+### 2) Uncertainty Scenarios
 
-These output files allow for an in-depth assessment of how uncertainty in costs, benefits, and success probabilities influences conservation planning decisions under different budget constraints.
+Data uncertainty is simulated across different parameter combinations:
 
-### 4) Tables and Figures
+| Scenario | Parameters affected |
+|----------|-------------------|
+| **BSCo** | Benefit, success, and cost |
+| **BS** | Benefit and success |
+| **BCo** | Benefit and cost |
+| **SCo** | Success and cost |
+| **B** | Benefit only |
+| **S** | Success only |
+| **Co** | Cost only |
+| **Baseline** | No uncertainty |
 
-This section of code generates the following figures, which can be found in the `output/` directory:
+### 3) Output Files
 
-- **ppp_figure_1.pdf**: Bar plots depicting the proportion of plans categorized as *always*, *sometimes*, and *never* included across different uncertainty and budget scenarios.  
-- **ppp_figure_2.pdf**: Visualization of the probability of recovery plan inclusion in a funded portfolio under high uncertainty.  
-- **ppp_figure_3.pdf**: Illustration of the fraction of recovery plans in each decision category as a function of inclusion thresholds.  
-- **ppp_figure_4.pdf**: Depiction of variation in conservation benefit under simulated uncertainty, applied separately to benefits, probability of success, and costs.  
+For each scenario, four dataframes are generated in **output/**:
 
-### 5) Example of Variance in Benefits, Success, and Cost  
+- **{Scenario}_output.csv**: Mean number of species funded and conservation benefits with standard deviations.
+- **{Scenario}_probfund.csv**: Probability of plan inclusion across variance levels.
+- **{Scenario}_probfund_results.csv**: Plans classified as *always*, *sometimes*, or *never* included.
+- **one.of.the.datasim.{Scenario}.csv**: Example output from a single simulation iteration.
 
-The following tables illustrate how variance is introduced to the **Cost**, **Benefit**, and **Success** parameters under low, medium, and high uncertainty levels:  
+### 4) Figures and Tables
 
-- **sim_beta.csv**: Contains variance parameters used to simulate uncertainty in benefit and success variables, drawn from a beta distribution.  
-- **sim_norm.csv**: Contains variance parameters used to simulate uncertainty in cost variables, drawn from a normal distribution.  
+Generated outputs saved to **output/** include:
 
+- **ppp_figure_1.pdf**: Proportion of plans in each inclusion category across uncertainty and budget scenarios.  
+- **ppp_figure_2.pdf**: Probability of recovery plan inclusion under high uncertainty.  
+- **ppp_figure_3.pdf**: Plans by decision category across different inclusion thresholds.  
+- **ppp_figure_4.pdf**: Variation in conservation benefit under different uncertainty sources.  
 
 ## Dependencies  
-This project requires the following R packages:
 
+- R ≥ 3.3.2
 - magrittr
 - DT
 - ggplot2
@@ -133,28 +131,16 @@ This project requires the following R packages:
 - reshape2
 - simpleboot
 - cowplot
-- simpleboot
 - boot
 
-## File Structure
-
-```r
-/PPP-Uncertainty/
-│── README.docx
-│── data/                # Raw data files
-│── output/              # Plots and tables generated for the analysis
-│── functions/           # Functions used for the analysis
-│── final_script.Rmd     # Main script
-```
-
-## Terms of Use: CC-BY-40
+## Terms of Use: CC-BY-4.0
 
 You are free to:
 
 - **Share** — copy and redistribute the material in any medium or format for any purpose, even commercially.
 - **Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
 
-Under the following terms:
-- **Attribution** You must give appropriate credit, provide a link to the license, and indicate if changes were made . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+Under these terms:
+- **Attribution** — provide appropriate credit, a link to the license, and indicate if changes were made. You may do so in any reasonable manner without suggesting the licensor endorses your use.
 
-
+Now data/ and output/ are consistent throughout—bolded, with trailing slash, no leading slash.
