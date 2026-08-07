@@ -6,8 +6,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-version: R version 3.3.2 for MacOSX, with packages downloaded as of 2016-11-12
- 
 
 ### 1) Set Working Directory 
 
@@ -15,9 +13,6 @@ version: R version 3.3.2 for MacOSX, with packages downloaded as of 2016-11-12
 
 #USER CONFIGURATION
 knitr::opts_chunk$set(echo = TRUE)
-root.dir = dirname(getwd()) # this might work better for PC users.
-knitr::opts_knit$set(root.dir = root.dir)
-knitr::opts_knit$set(root.dir = "/Users/alexrogers/Desktop")
 
 ```
 
@@ -29,8 +24,7 @@ knitr::opts_knit$set(root.dir = "/Users/alexrogers/Desktop")
     rm(list=ls())
     gc()
     (.packages())
-    getwd()
-    setwd("/Users/alexrogers/Desktop/ppp_project")
+ 
     
     # Load Packages
     library(magrittr)
