@@ -14,11 +14,13 @@ This study examines how simulated uncertainty in estimates of recovery plan cost
 
  ## Quick Start
 
-   1. Clone or download this repository
-   2. Ensure all datasets in **data/** are present
-   3. Open `final_script.Rmd` in RStudio
-   4. Click **Knit** (or run chunks sequentially)
-   5. Results will be saved to **output/**
+   1.  Clone or download this repository
+   2. Ensure you have the correct version of R.
+   3.  Unzip packages folder.
+   Ensure all datasets in **data/** are present
+   4. Open `final_script.Rmd` in RStudio
+   5. Click **Knit** (or run chunks sequentially)
+   6. Results will be saved to **output/** (this will overwrite contents)
   
  ## Code
 
