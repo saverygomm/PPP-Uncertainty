@@ -142,19 +142,6 @@ Generated outputs saved to **output/** include:
 - **ppp_figure_3.pdf**: Plans by decision category across different inclusion thresholds.  
 - **ppp_figure_4.pdf**: Variation in conservation benefit under different uncertainty sources.  
 
-## Dependencies  
-
-- R ≥ 3.3.2
-- magrittr
-- DT
-- ggplot2
-- plotly
-- tidyverse
-- scales
-- reshape2
-- simpleboot
-- cowplot
-- boot
 
 ## Terms of Use: CC-BY-4.0
 
