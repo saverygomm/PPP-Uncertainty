@@ -24,6 +24,7 @@ This study examines how simulated uncertainty in estimates of recovery plan cost
 
 The code required to reproduce the PPP analysis is `final_script.Rmd` and relies on input files stored in **data/**. The script is well-commented and structured as described below.
 
+
 ### Prerequisites
 
 - **R version**: 3.3.2 (or compatible)
