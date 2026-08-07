@@ -50,7 +50,7 @@ The analysis requires a custom beta distribution function located in **functions
 
 The following datasets, located in **data/**, serve as inputs for the analysis:  
 
-- **AllPPPOutput.csv**: Final output from the [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434) PPP analysis, providing cost estimates at the recovery plan level (identified by `unique_plan_num`).  
+- **AllPPPOutput.csv**: Output associated with the the study by [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434), which providing cost, success and benefit estimates at the recovery plan level (identified by `unique_plan_num`). Links to data and code provided in that publication are now broken. However, identical copies of the data and code from that study have been archived here: TBD. 
 
 - **draft_b.csv**: An intermediate dataset generated prior to **Data2.csv** in the `GenerateBenefits.R` function. Indicates which `sp_vip_codes` were included in the analysis and links benefit data from the species-level RPN file.  
 
