@@ -27,12 +27,12 @@ The code required to reproduce the PPP analysis is `final_script.Rmd` and relies
 
 ### Prerequisites
 
-- **R version**: 3.3.2 (or compatible)
+- **R version**: 4.4.0 (or compatible)
 - **Required packages**: Install before running:
 
 ```r
 install.packages(c("magrittr", "DT", "ggplot2", "plotly", "tidyverse", "scales", 
-                   "reshape2", "simpleboot", "cowplot", "boot"))
+                   "reshape2", "simpleboot", "cowplot", "boot", "rmarkdown"))
 ```
 
 ### Custom Functions
@@ -48,7 +48,7 @@ The analysis requires a custom beta distribution function located in **functions
 
 The following datasets, located in **data/**, serve as inputs for the analysis:  
 
-- **AllPPPOutput.csv**: Final output from the [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434) PPP analysis, providing cost estimates at the recovery plan level (identified by `unique_plan_num`).  
+- **AllPPPOutput.csv**: Output associated with the study by [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434), providing cost, success and benefit estimates at the recovery plan level (identified by `unique_plan_num`). Links to data and code provided in that publication are now broken. However, identical copies of the data and code from that study have been archived here: TBD. 
 
 - **draft_b.csv**: An intermediate dataset generated prior to **Data2.csv** in the `GenerateBenefits.R` function. Indicates which `sp_vip_codes` were included in the analysis and links benefit data from the species-level RPN file.  
 
@@ -140,19 +140,6 @@ Generated outputs saved to **output/** include:
 - **ppp_figure_3.pdf**: Plans by decision category across different inclusion thresholds.  
 - **ppp_figure_4.pdf**: Variation in conservation benefit under different uncertainty sources.  
 
-## Dependencies  
-
-- R ≥ 3.3.2
-- magrittr
-- DT
-- ggplot2
-- plotly
-- tidyverse
-- scales
-- reshape2
-- simpleboot
-- cowplot
-- boot
 
 ## Terms of Use: CC-BY-4.0
 
@@ -171,6 +158,8 @@ Now data/ and output/ are consistent throughout—bolded, with trailing slash, n
 
 
 # TO DO BEFORE PUBLISHING
+
+#### Add link to Gerber data & code
 
 #### Column List Verification
 
