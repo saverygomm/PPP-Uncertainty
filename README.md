@@ -15,12 +15,10 @@ This study examines how simulated uncertainty in estimates of recovery plan cost
  ## Quick Start
 
    1. Clone or download this repository
-   2. Ensure you have the correct version of R.
-   3. Unzip packages folder.
-   Ensure all datasets in **data/** are present
-   4. Open `final_script.Rmd` in RStudio
-   5. Click **Knit** (or run chunks sequentially)
-   6. Results will be saved to **output/** (this will overwrite contents)
+   2. Ensure all datasets in **data/** are present
+   3. Open `final_script.Rmd` in RStudio
+   4. Click **Knit** (or run chunks sequentially)
+   5. Results will be saved to **output/**
   
  ## Code
 
@@ -50,7 +48,7 @@ The analysis requires a custom beta distribution function located in **functions
 
 The following datasets, located in **data/**, serve as inputs for the analysis:  
 
-- **AllPPPOutput.csv**: Output associated with the the study by [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434), which providing cost, success and benefit estimates at the recovery plan level (identified by `unique_plan_num`). Links to data and code provided in that publication are now broken. However, identical copies of the data and code from that study have been archived here: TBD. 
+- **AllPPPOutput.csv**: Output associated with the study by [Gerber et al., 2018](https://www.science.org/doi/10.1126/science.aat8434), providing cost, success and benefit estimates at the recovery plan level (identified by `unique_plan_num`). Links to data and code provided in that publication are now broken. However, identical copies of the data and code from that study have been archived here: TBD. 
 
 - **draft_b.csv**: An intermediate dataset generated prior to **Data2.csv** in the `GenerateBenefits.R` function. Indicates which `sp_vip_codes` were included in the analysis and links benefit data from the species-level RPN file.  
 
@@ -160,6 +158,8 @@ Now data/ and output/ are consistent throughout—bolded, with trailing slash, n
 
 
 # TO DO BEFORE PUBLISHING
+
+#### Add link to Gerber data & code
 
 #### Column List Verification
 
