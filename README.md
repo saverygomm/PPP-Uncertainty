@@ -12,7 +12,15 @@ This repository contains all data and code necessary to generate manuscript resu
 
 This study examines how simulated uncertainty in estimates of recovery plan cost, conservation benefit, and probability of success influences the composition of funded portfolios and the expected conservation benefit. Through a sensitivity analysis, we identify scenarios where decision guidance remains robust despite data uncertainty.
 
-## Code
+ ## Quick Start
+
+   1. Clone or download this repository
+   2. Ensure all datasets in **data/** are present
+   3. Open `final_script.Rmd` in RStudio
+   4. Click **Knit** (or run chunks sequentially)
+   5. Results will be saved to **output/**
+  
+ ## Code
 
 The code required to reproduce the PPP analysis is `final_script.Rmd` and relies on input files stored in **data/**. The script is well-commented and structured as described below.
 
@@ -25,6 +33,13 @@ The code required to reproduce the PPP analysis is `final_script.Rmd` and relies
 install.packages(c("magrittr", "DT", "ggplot2", "plotly", "tidyverse", "scales", 
                    "reshape2", "simpleboot", "cowplot", "boot"))
 ```
+
+### Custom Functions
+
+The analysis requires a custom beta distribution function located in **functions/**:
+
+- **rBeta.R**: Custom function for generating random values from a beta distribution with specified parameters.
+
 
 ### 1) Import and Process Species Plan Data for Analysis
 
@@ -40,7 +55,12 @@ The following datasets, located in **data/**, serve as inputs for the analysis:
 
 - **sim_df.chosen.csv**: Selected variance parameters for cost, benefit, and success variables.  
 
-- **sim_df_baseline.csv**: Budget parameters for sensitivity analyses.  
+- **sim_df_baseline.csv**: Budget parameters for sensitivity analyses.
+
+- **sim_beta.csv**: Variance parameters for beta distribution (benefit and success variables).
+
+- **sim_norm.csv**: Variance parameters for normal distribution (cost variables).
+
 
 #### Processed Dataset Output
 
@@ -144,3 +164,22 @@ Under these terms:
 - **Attribution** — provide appropriate credit, a link to the license, and indicate if changes were made. You may do so in any reasonable manner without suggesting the licensor endorses your use.
 
 Now data/ and output/ are consistent throughout—bolded, with trailing slash, no leading slash.
+
+
+
+
+
+# TO DO BEFORE PUBLISHING
+
+#### Column List Verification
+
+**Note:** The detailed column lists above (Species-Level Variables (sp_vip_code, RPN_Benefit, RPN_TaxoWeighting, etc.)
+Plan-Level Variables (unique_plan_num, SpeciesInPlan, Co, B, S, etc.) Metadata Variables (taxonomic_group, taxa_code_text, rpn, threat_status, etc.)) reflects the expected structure of **dataSpp** based on the preprocessing logic in `final_script.Rmd`. To verify this matches your actual output, run the preprocessing chunks and inspect the dataset:
+
+```r
+str(dataSpp)
+colnames(dataSpp)
+head(dataSpp)
+```
+
+If the column names or structure differ, update the README and the script comments accordingly. Pay particular attention to any species-level or plan-level variables that may have been dropped during the merging or filtering steps (lines 143–187 of the script).
