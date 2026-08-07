@@ -29,12 +29,12 @@ The code required to reproduce the PPP analysis is `final_script.Rmd` and relies
 
 ### Prerequisites
 
-- **R version**: 3.3.2 (or compatible)
+- **R version**: 4.4.0 (or compatible)
 - **Required packages**: Install before running:
 
 ```r
 install.packages(c("magrittr", "DT", "ggplot2", "plotly", "tidyverse", "scales", 
-                   "reshape2", "simpleboot", "cowplot", "boot"))
+                   "reshape2", "simpleboot", "cowplot", "boot", "rmarkdown"))
 ```
 
 ### Custom Functions
