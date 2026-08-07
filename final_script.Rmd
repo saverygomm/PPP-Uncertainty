@@ -7,41 +7,37 @@ editor_options:
 ---
 
 
-### 1) Set Working Directory 
-
 ```{r setup, include=FALSE}
-
-#USER CONFIGURATION
 knitr::opts_chunk$set(echo = TRUE)
-
 ```
 
-### 2) Load Dependencies
+### 1) Load Dependencies
 ```{r initializing, message=FALSE, warning=FALSE, echo=FALSE, include=FALSE}
-# INITIALIZING
 
-    # Clear work space and setting working directory
-    rm(list=ls())
-    gc()
-    (.packages())
- 
-    
-    # Load Packages
-    library(magrittr)
-    library(DT)
-    library(ggplot2)
-    library(plotly)
-    library(tidyverse) 
-    library(scales)
-    library(reshape2)
-    library(simpleboot) 
-    library(cowplot) 
+# Install packages
+# install.packages(c(,"magrittr", "DT", "ggplot2", "plotly", "tidyverse", "scales", 
+               # "reshape2", "simpleboot", "cowplot", "boot", "rmarkdown"))
 
+# Load Packages
+library(rmarkdown)
+library(magrittr)
+library(DT)
+library(ggplot2)
+library(plotly)
+library(tidyverse) 
+library(scales)
+library(reshape2)
+library(simpleboot) 
+library(cowplot) 
+
+# Load custom functions
+source("./functions/rBeta.R")
 
 set.seed(3) # Set Seed for reproducible results.
 options(scipen=999) # Disable Scientific Notation
 
 sessionInfo()
+
 ```
 
 ## 3) Import and Process Cost, Benefit, Efficiency, and Species Plan Data
@@ -61,7 +57,6 @@ Preparation of the file to run the uncertainty analysis requires combining sever
 ```{r load_RPN_B_S_T_for_1350_sps_vip_codes}
 
 # Importing and cleaning RPN data
-
 RPNdata <- read.csv("./data/RPNs-for-plan_id-and-sp_vip_code-combos-NAs-imputed.csv")
      
 # Trim any plan level information and dropping variables
@@ -2105,9 +2100,6 @@ The objective here is to report the:
 set.seed(123)
 # Bootstrapping confidence intervals for BENEFIT and SUCCESS from BETA distribution (0.12 - 0.88)
 
-library(simpleboot)
-library(boot)
-
 sim_beta<-read.csv("./data/sim_beta.csv")
 
 ## Establishing placeholders for loop
@@ -2149,7 +2141,11 @@ results_sim_beta2 <- results_sim_beta %>%
             variance = simasq) %>%
     select(-lowerCI, -upperCI, -simasq)
 
-TableUBSCI <- spread(results_sim_beta2, mu, ConfidenceInterval) 
+# Old:
+# TableUBSCI <- spread(results_sim_beta2, mu, ConfidenceInterval)
+
+# New:
+TableUBSCI <- pivot_wider(results_sim_beta2, names_from = mu, values_from = ConfidenceInterval)
 
 TableUBSCI
 
@@ -2171,8 +2167,6 @@ write.csv(TableUBSCI, file = "./output/Table UBS. Confidence Intervals for Benef
 
 rm(mu)
 rm(simasq)
-
-library(simpleboot)
 
 sim_norm<-read.csv("./data/sim_norm.csv")
 results_sim_norm <- numeric() 
@@ -2204,7 +2198,12 @@ for (t in 1:nrow(sim_norm))
         select(-lowerCI, -upperCI)
     results_sim_norm2
     
-    TableUCoCI <- spread(results_sim_norm2, mean, ConfidenceInterval) 
+    # Old:
+    # TableUCoCI <- spread(results_sim_norm2, mean, ConfidenceInterval)
+    
+    # New:
+    TableUCoCI <- pivot_wider(results_sim_norm2, names_from = mean, values_from = ConfidenceInterval)
+
     TableUCoCI
 
 print("Table 1: The minimum and maximum values for random variables drawn from a normal distribution for total recovery plan costs, illustrating impact of uncertainty on cost estimates (25th, 50th, and 75th quantile) when Low (variance = mean*0.05), Medium (variance = mean*0.1) and High (variance = mean*0.2) levels of uncertainty are introduced.")
@@ -2267,7 +2266,6 @@ results_sim_beta2 <- results_sim_beta %>%
 rm(mu)
 rm(simasq)
 
-library(simpleboot)
 sim_norm<-read.csv("./data/sim_norm.csv")
 
 results_sim_norm <- numeric() 
@@ -2292,7 +2290,12 @@ for (t in 1:nrow(sim_norm))
         select(-min, -max)
     results_sim_norm2
     
-    TableUCoRange <- spread(results_sim_norm2, mean, Range)
+    # Old:
+    # TableUCoRange <- spread(results_sim_norm2, mean, Range)
+    
+    # New:
+    TableUCoRange <- pivot_wider(results_sim_norm2, names_from = mean, values_from = Range)
+
     TableUCoRange 
   
 print("Table 1: The minimum and maximum values for random variables drawn from a normal distribution for total recovery plan costs, illustrating impact of uncertainty on cost estimates (25th, 50th, and 75th quantile) when Low (variance = mean*0.05), Medium (variance = mean*0.1) and High (variance = mean*0.2) levels of uncertainty are introduced.")
